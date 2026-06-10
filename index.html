@@ -12,22 +12,29 @@
     --white:#f4f4ef; --red:#c0552f;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--white);font-family:'Segoe UI',Calibri,system-ui,sans-serif;line-height:1.5}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--white);font-family:'Segoe UI',Calibri,system-ui,sans-serif;line-height:1.5;overflow-x:hidden}
   .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 
-  header{border-bottom:1px solid var(--line);background:rgba(10,18,13,.85);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;flex-wrap:wrap}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
-  .ol-mark{font-family:Arial,sans-serif;font-weight:800;font-size:18px}
-  .ol-mark .b{color:var(--green)} .ol-mark .g{color:var(--grey)}
-  .har-mark{font-family:Georgia,serif;text-align:right;line-height:1.05}
-  .har-mark .h{color:var(--gold);font-weight:700;font-size:18px;letter-spacing:1px}
-  .har-mark .s{color:var(--green2);font-size:8px;letter-spacing:3px;font-family:Arial,sans-serif}
-  .sep{width:1px;height:34px;background:var(--line)}
-  .tag{font-size:11px;color:var(--grey);letter-spacing:2px}
+  /* scroll progress bar */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;
+    background:linear-gradient(90deg,var(--green),var(--gold));box-shadow:0 0 8px rgba(106,168,50,.6);transition:width .08s linear}
 
-  .hero{padding:54px 0 30px;text-align:center;border-bottom:1px solid var(--line);
-    background:radial-gradient(1100px 320px at 50% -40%,rgba(106,168,50,.10),transparent)}
+  header{border-bottom:1px solid var(--line);background:rgba(10,18,13,.85);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10;transition:padding .25s ease,background .25s ease}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;flex-wrap:wrap;transition:padding .25s ease}
+  header.scrolled .topbar{padding:7px 0}
+  .brand{display:flex;align-items:center;gap:12px}
+  .tag{font-size:11px;color:var(--grey);letter-spacing:2px}
+  .sep{width:1px;height:34px;background:var(--line)}
+  .logo-ol{height:46px;width:auto;display:block;transition:height .25s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+  header.scrolled .logo-ol{height:34px}
+  .logo-haran{height:40px;width:auto;display:block;border:1px solid var(--line);border-radius:8px;background:#0c1712;padding:3px 6px;transition:height .25s ease,transform .25s ease}
+  header.scrolled .logo-haran{height:32px}
+  .logo-ol:hover,.logo-haran:hover{transform:translateY(-2px)}
+
+  .hero{padding:54px 0 34px;text-align:center;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 320px at 50% -40%,rgba(106,168,50,.12),transparent)}
+  .hero-logo{height:120px;width:auto;margin:0 auto 18px;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
   .kicker{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:700;font-family:Arial,sans-serif}
   .hero h1{font-family:Georgia,serif;font-size:clamp(28px,5vw,46px);margin:10px 0 6px;font-weight:700}
   .hero .sub{color:var(--green);font-style:italic;font-size:clamp(15px,2.4vw,20px)}
@@ -40,29 +47,49 @@
   .sec-head .pt{color:var(--green);font-style:italic;font-size:14px}
 
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:22px 18px;position:relative;overflow:hidden}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:22px 18px;position:relative;overflow:hidden;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .kpi:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.35);border-color:var(--green)}
   .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
   .kpi.gold::before{background:var(--gold)} .kpi.white::before{background:var(--white)}
-  .kpi .num{font-family:Georgia,serif;font-size:40px;font-weight:700;color:var(--green)}
+  .kpi .num{font-family:Georgia,serif;font-size:40px;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums}
   .kpi.gold .num{color:var(--gold)} .kpi.white .num{color:var(--white)}
   .kpi .lab{font-weight:700;font-size:14px;margin-top:4px}
   .kpi .pt{color:var(--grey);font-style:italic;font-size:12px}
 
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px}
+  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .panel:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.30);border-color:var(--green2)}
   .panel h3{font-family:Georgia,serif;font-size:18px;margin-bottom:2px}
   .panel .pt{color:var(--green);font-style:italic;font-size:12.5px;margin-bottom:14px}
   .canvas-box{position:relative;height:320px}
   .note{color:var(--grey);font-size:12.5px;margin-top:12px;border-left:3px solid var(--gold);padding-left:10px}
 
   .takes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .take{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .take{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .take:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.35);border-color:var(--gold)}
   .take .n{font-family:Georgia,serif;font-size:34px;color:var(--gold);font-weight:700}
   .take .t{font-family:Georgia,serif;color:var(--green);font-weight:700;font-size:16px;margin:6px 0 6px}
   .take .d{font-size:13px;color:var(--white)}
 
   footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--grey);font-size:12.5px}
-  .foot-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .foot-ol{height:48px;width:auto}
+  .foot-haran{height:42px;width:auto;border:1px solid var(--line);border-radius:8px;background:#0c1712;padding:3px 6px}
+
+  /* back to top */
+  #toTop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:none;border-radius:50%;
+    background:var(--green);color:#0e1b14;font-size:22px;font-weight:700;cursor:pointer;z-index:40;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;
+    transition:opacity .3s ease,transform .3s ease,background .2s ease}
+  #toTop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  #toTop:hover{background:var(--gold)}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
 
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}
@@ -73,37 +100,46 @@
     .wrap{padding:0 16px}
     .topbar{flex-direction:column;align-items:stretch;gap:12px;padding:12px 0}
     .brand{justify-content:space-between;width:100%}
-    .hero{padding:34px 0 24px}
+    .logo-ol{height:38px} header.scrolled .logo-ol{height:32px}
+    .hero{padding:30px 0 22px}
+    .hero-logo{height:88px}
     section{padding:28px 0}
     .kpi{padding:18px 14px}
     .kpi .num{font-size:32px}
     .take .n{font-size:28px}
     .canvas-box{height:260px}
     .panel{padding:16px 14px 14px}
-    .foot-row{flex-direction:column;align-items:flex-start;gap:6px}
-    .foot-row .har-mark{text-align:left}
+    .foot-row{flex-direction:column;align-items:flex-start;gap:12px}
   }
   @media(max-width:380px){ .kpis,.takes{grid-template-columns:1fr} }
+
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
+
+<div id="progress"></div>
 
 <header>
   <div class="wrap topbar">
     <div class="brand">
       <span class="tag">CLIENT</span>
-      <span class="ol-mark"><span class="b">OL PEJETA</span> <span class="g">BEEF</span></span>
+      <img class="logo-ol" src="assets/ol-pejeta-beef.png" alt="Ol Pejeta Beef">
     </div>
     <div class="brand">
       <span class="tag">SERVICE PROVIDER</span>
       <span class="sep"></span>
-      <span class="har-mark"><div class="h">HARAN</div><div class="s">REGENERATIVE SYSTEMS</div></span>
+      <img class="logo-haran" src="assets/haran.png" alt="Haran — Regenerative Systems">
     </div>
   </div>
 </header>
 
 <div class="hero">
   <div class="wrap">
+    <img class="hero-logo" src="assets/ol-pejeta-beef.png" alt="Ol Pejeta Beef">
     <div class="kicker">TECHNICAL REPORT · RELATÓRIO TÉCNICO</div>
     <h1>Pregnancy Diagnosis — Fixed-Time AI</h1>
     <div class="sub">Diagnóstico de Gestação — IATF</div>
@@ -114,56 +150,56 @@
 <div class="wrap">
 
   <section>
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div class="kick">OVERVIEW · VISÃO GERAL</div>
       <h2>Overall diagnosis summary</h2>
       <div class="pt">Resumo geral do diagnóstico</div>
     </div>
     <div class="kpis">
-      <div class="kpi"><div class="num">84.1%</div><div class="lab">Pregnancy rate</div><div class="pt">Taxa de prenhez</div></div>
-      <div class="kpi gold"><div class="num">220</div><div class="lab">Diagnosed (100%)</div><div class="pt">Diagnosticados</div></div>
-      <div class="kpi white"><div class="num">185</div><div class="lab">Pregnant (AI + Bull)</div><div class="pt">Prenhes</div></div>
-      <div class="kpi"><div class="num">152</div><div class="lab">AI pregnancies (69.1%)</div><div class="pt">Prenhes via IA</div></div>
+      <div class="kpi reveal"><div class="num" data-target="84.1" data-dec="1" data-suffix="%">0</div><div class="lab">Pregnancy rate</div><div class="pt">Taxa de prenhez</div></div>
+      <div class="kpi gold reveal"><div class="num" data-target="220">0</div><div class="lab">Diagnosed (100%)</div><div class="pt">Diagnosticados</div></div>
+      <div class="kpi white reveal"><div class="num" data-target="185">0</div><div class="lab">Pregnant (AI + Bull)</div><div class="pt">Prenhes</div></div>
+      <div class="kpi reveal"><div class="num" data-target="152">0</div><div class="lab">AI pregnancies (69.1%)</div><div class="pt">Prenhes via IA</div></div>
     </div>
   </section>
 
   <section style="padding-top:6px">
     <div class="grid">
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>Diagnosis pipeline</h3>
         <div class="pt">Pipeline do diagnóstico</div>
         <div class="canvas-box"><canvas id="cPipe"></canvas></div>
       </div>
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>Result breakdown</h3>
         <div class="pt">Composição do resultado: IA vs Touro vs Vazia</div>
         <div class="canvas-box"><canvas id="cDonut"></canvas></div>
       </div>
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>Diagnosis by herd</h3>
         <div class="pt">Diagnóstico por rebanho</div>
         <div class="canvas-box"><canvas id="cHerd"></canvas></div>
         <div class="note">ERIA/KAMUNGE leads at 87.6% pregnancy; Ajiot at 80.9%, with the highest number of empties (22).</div>
       </div>
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>Pregnancy rate by inseminator</h3>
         <div class="pt">Taxa de prenhez por inseminador</div>
         <div class="canvas-box"><canvas id="cIns"></canvas></div>
         <div class="note">Carlos V. Nascimento 85.0% · Fredrick O. Obondo 83.0% — balanced performance across the pair.</div>
       </div>
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>AI efficiency by inseminator</h3>
         <div class="pt">Eficiência da IA — % das prenhezes vindas da IA</div>
         <div class="canvas-box"><canvas id="cEff"></canvas></div>
         <div class="note">“% from AI” = share of each inseminator’s pregnancies that came from AI (not bull cleanup).</div>
       </div>
 
-      <div class="panel">
+      <div class="panel reveal">
         <h3>Performance by bull (semen)</h3>
         <div class="pt">Desempenho por touro (sêmen)</div>
         <div class="canvas-box"><canvas id="cBull"></canvas></div>
@@ -174,16 +210,16 @@
   </section>
 
   <section>
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div class="kick">KEY TAKEAWAYS · CONCLUSÕES</div>
       <h2>84.1% pregnancy across the batch</h2>
       <div class="pt">220 animals, 100% diagnosed</div>
     </div>
     <div class="takes">
-      <div class="take"><div class="n">01</div><div class="t">Full coverage</div><div class="d">220 of 220 animals diagnosed (100%); 185 pregnant — an 84.1% rate.</div></div>
-      <div class="take"><div class="n">02</div><div class="t">AI-driven</div><div class="d">69.1% of pregnancies came from fixed-time AI; the bull accounted for just 15%.</div></div>
-      <div class="take"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminators at 83–85% pregnancy and ~68–70% AI efficiency.</div></div>
-      <div class="take"><div class="n">04</div><div class="t">Concentrated genetics</div><div class="d">Bulls 0037 and 1156/356 together make up 74% of AI pregnancies.</div></div>
+      <div class="take reveal"><div class="n">01</div><div class="t">Full coverage</div><div class="d">220 of 220 animals diagnosed (100%); 185 pregnant — an 84.1% rate.</div></div>
+      <div class="take reveal"><div class="n">02</div><div class="t">AI-driven</div><div class="d">69.1% of pregnancies came from fixed-time AI; the bull accounted for just 15%.</div></div>
+      <div class="take reveal"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminators at 83–85% pregnancy and ~68–70% AI efficiency.</div></div>
+      <div class="take reveal"><div class="n">04</div><div class="t">Concentrated genetics</div><div class="d">Bulls 0037 and 1156/356 together make up 74% of AI pregnancies.</div></div>
     </div>
   </section>
 
@@ -191,11 +227,13 @@
 
 <footer>
   <div class="wrap foot-row">
-    <span class="ol-mark"><span class="b">OL PEJETA</span> <span class="g">BEEF</span></span>
+    <img class="foot-ol" src="assets/ol-pejeta-beef.png" alt="Ol Pejeta Beef">
     <span>prepared by · preparado por</span>
-    <span class="har-mark"><div class="h">HARAN</div><div class="s">REGENERATIVE SYSTEMS</div></span>
+    <img class="foot-haran" src="assets/haran.png" alt="Haran — Regenerative Systems">
   </div>
 </footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
 
 <script>
 const GREEN='#6aa832',GREEN2='#3f7a2e',GOLD='#d9c37a',GREY='#9aa0a6',WHITE='#f4f4ef',RED='#c0552f',LINE='#24382b';
@@ -204,60 +242,126 @@ Chart.defaults.font.family="'Segoe UI',Calibri,sans-serif";
 Chart.defaults.font.size=13;
 Chart.defaults.maintainAspectRatio=false;
 Chart.defaults.responsive=true;
+const $=id=>document.getElementById(id);
+const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- chart factories (built lazily on scroll into view) ---------- */
 const grid={color:LINE,drawBorder:false};
 const noGrid={display:false};
-const $=id=>document.getElementById(id);
+const anim=reduce?false:{duration:900,easing:'easeOutQuart'};
 
-new Chart($('cPipe'),{type:'bar',data:{
-  labels:[['Herd size','Animais no lote'],['Diagnosed','Diagnosticados'],['Pregnant','Prenhe'],['Empty','Vazia']],
-  datasets:[{data:[220,220,185,35],backgroundColor:[GREY,GREEN2,GREEN,RED],borderRadius:6,maxBarThickness:90}]},
-  options:{plugins:{legend:{display:false}},scales:{y:{grid,ticks:{precision:0}},x:{grid:noGrid}}}});
+const charts={
+  cPipe:()=>new Chart($('cPipe'),{type:'bar',data:{
+    labels:[['Herd size','Animais no lote'],['Diagnosed','Diagnosticados'],['Pregnant','Prenhe'],['Empty','Vazia']],
+    datasets:[{data:[220,220,185,35],backgroundColor:[GREY,GREEN2,GREEN,RED],borderRadius:6,maxBarThickness:90}]},
+    options:{animation:anim,plugins:{legend:{display:false}},scales:{y:{grid,ticks:{precision:0}},x:{grid:noGrid}}}}),
 
-new Chart($('cDonut'),{type:'doughnut',data:{
-  labels:['AI pregnant / Prenhe IA (152 · 69.1%)','Bull pregnant / Prenhe Touro (33 · 15.0%)','Empty / Vazia (35 · 15.9%)'],
-  datasets:[{data:[152,33,35],backgroundColor:[GREEN,GOLD,RED],borderColor:'#0e1b14',borderWidth:3}]},
-  options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,boxWidth:14}}}}});
+  cDonut:()=>new Chart($('cDonut'),{type:'doughnut',data:{
+    labels:['AI pregnant / Prenhe IA (152 · 69.1%)','Bull pregnant / Prenhe Touro (33 · 15.0%)','Empty / Vazia (35 · 15.9%)'],
+    datasets:[{data:[152,33,35],backgroundColor:[GREEN,GOLD,RED],borderColor:'#0e1b14',borderWidth:3,hoverOffset:10}]},
+    options:{animation:reduce?false:{animateRotate:true,duration:1100},cutout:'62%',
+      plugins:{legend:{position:'bottom',labels:{padding:14,boxWidth:14}}}}}),
 
-new Chart($('cHerd'),{type:'bar',data:{
-  labels:['Ajiot','ERIA/KAMUNGE'],
-  datasets:[
-   {label:'AI / IA',data:[82,70],backgroundColor:GREEN,stack:'s'},
-   {label:'Bull / Touro',data:[11,22],backgroundColor:GOLD,stack:'s'},
-   {label:'Empty / Vazia',data:[22,13],backgroundColor:RED,stack:'s'}]},
-  options:{plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}},
-   scales:{x:{stacked:true,grid:noGrid},y:{stacked:true,grid,ticks:{precision:0}}}}});
+  cHerd:()=>new Chart($('cHerd'),{type:'bar',data:{
+    labels:['Ajiot','ERIA/KAMUNGE'],
+    datasets:[
+     {label:'AI / IA',data:[82,70],backgroundColor:GREEN,stack:'s'},
+     {label:'Bull / Touro',data:[11,22],backgroundColor:GOLD,stack:'s'},
+     {label:'Empty / Vazia',data:[22,13],backgroundColor:RED,stack:'s'}]},
+    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}},
+     scales:{x:{stacked:true,grid:noGrid},y:{stacked:true,grid,ticks:{precision:0}}}}}),
 
-new Chart($('cIns'),{data:{
-  labels:[['Carlos V.','Nascimento'],['Fredrick O.','Obondo']],
-  datasets:[
-   {type:'bar',label:'AI / IA',data:[84,68],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
-   {type:'bar',label:'Bull / Touro',data:[18,15],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
-   {type:'bar',label:'Empty / Vazia',data:[18,17],backgroundColor:RED,stack:'s',yAxisID:'y'},
-   {type:'line',label:'Pregnancy rate / Taxa',data:[85.0,83.0],borderColor:WHITE,backgroundColor:WHITE,
-     yAxisID:'y1',tension:.3,pointRadius:5,pointBackgroundColor:WHITE}]},
-  options:{plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
-   scales:{x:{stacked:true,grid:noGrid},
-     y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animals'}},
-     y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'rate'}}}}});
+  cIns:()=>new Chart($('cIns'),{data:{
+    labels:[['Carlos V.','Nascimento'],['Fredrick O.','Obondo']],
+    datasets:[
+     {type:'bar',label:'AI / IA',data:[84,68],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Bull / Touro',data:[18,15],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Empty / Vazia',data:[18,17],backgroundColor:RED,stack:'s',yAxisID:'y'},
+     {type:'line',label:'Pregnancy rate / Taxa',data:[85.0,83.0],borderColor:WHITE,backgroundColor:WHITE,
+       yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE}]},
+    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
+     scales:{x:{stacked:true,grid:noGrid},
+       y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animals'}},
+       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'rate'}}}}}),
 
-new Chart($('cEff'),{type:'bar',data:{
-  labels:['Carlos V. Nascimento','Fredrick O. Obondo'],
-  datasets:[{data:[70,68],backgroundColor:[GREEN,GREEN2],borderRadius:6,maxBarThickness:46}]},
-  options:{indexAxis:'y',plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.parsed.x+'% of pregnancies from AI'}}},
-   scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'}},y:{grid:noGrid}}}});
+  cEff:()=>new Chart($('cEff'),{type:'bar',data:{
+    labels:['Carlos V. Nascimento','Fredrick O. Obondo'],
+    datasets:[{data:[70,68],backgroundColor:[GREEN,GREEN2],borderRadius:6,maxBarThickness:46}]},
+    options:{animation:anim,indexAxis:'y',plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.x+'% of pregnancies from AI'}}},
+     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'}},y:{grid:noGrid}}}}),
 
-new Chart($('cBull'),{data:{
-  labels:['0037','1156/356','652',['KPO 1971','...23SE12']],
-  datasets:[
-   {type:'bar',label:'AI pregnancies / Prenhes IA',data:[69,44,28,11],
-     backgroundColor:[GREEN,GREEN2,GOLD,'#7a6a3a'],borderRadius:6,yAxisID:'y',maxBarThickness:70},
-   {type:'line',label:'Conception rate / Concepção',data:[66.3,74.6,68.3,78.6],
-     borderColor:WHITE,backgroundColor:WHITE,yAxisID:'y1',tension:.3,pointRadius:5,pointBackgroundColor:WHITE}]},
-  options:{plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
-   scales:{x:{grid:noGrid},
-     y:{position:'left',grid,ticks:{precision:0},title:{display:true,text:'pregnancies'}},
-     y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'conception'}}}}});
+  cBull:()=>new Chart($('cBull'),{data:{
+    labels:['0037','1156/356','652',['KPO 1971','...23SE12']],
+    datasets:[
+     {type:'bar',label:'AI pregnancies / Prenhes IA',data:[69,44,28,11],
+       backgroundColor:[GREEN,GREEN2,GOLD,'#7a6a3a'],borderRadius:6,yAxisID:'y',maxBarThickness:70},
+     {type:'line',label:'Conception rate / Concepção',data:[66.3,74.6,68.3,78.6],
+       borderColor:WHITE,backgroundColor:WHITE,yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE}]},
+    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
+     scales:{x:{grid:noGrid},
+       y:{position:'left',grid,ticks:{precision:0},title:{display:true,text:'pregnancies'}},
+       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'conception'}}}}})
+};
+
+/* lazy-init each chart the first time its panel scrolls into view */
+const chartObs=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      if(charts[id]){ charts[id](); delete charts[id]; }
+      obs.unobserve(e.target);
+    }
+  });
+},{rootMargin:'0px 0px -10% 0px',threshold:.15});
+Object.keys(charts).forEach(id=>chartObs.observe($(id)));
+
+/* ---------- scroll reveal (staggered) ---------- */
+const revObs=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+},{rootMargin:'0px 0px -8% 0px',threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay=(Math.min(i,6)*70)+'ms';
+  revObs.observe(el);
+});
+
+/* ---------- animated KPI counters ---------- */
+function animateCount(el){
+  const target=parseFloat(el.dataset.target);
+  const dec=parseInt(el.dataset.dec||'0',10);
+  const suffix=el.dataset.suffix||'';
+  if(reduce){ el.textContent=target.toFixed(dec)+suffix; return; }
+  const dur=1400, t0=performance.now();
+  const ease=t=>1-Math.pow(1-t,3);
+  function step(now){
+    const p=Math.min((now-t0)/dur,1);
+    el.textContent=(target*ease(p)).toFixed(dec)+suffix;
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent=target.toFixed(dec)+suffix;
+  }
+  requestAnimationFrame(step);
+}
+const countObs=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ animateCount(e.target); obs.unobserve(e.target); }
+  });
+},{threshold:.6});
+document.querySelectorAll('.kpi .num[data-target]').forEach(el=>countObs.observe(el));
+
+/* ---------- scroll progress bar + sticky header shrink + back-to-top ---------- */
+const bar=$('progress'), head=document.querySelector('header'), toTop=$('toTop');
+function onScroll(){
+  const st=window.scrollY||document.documentElement.scrollTop;
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  bar.style.width=(h>0?(st/h)*100:0)+'%';
+  head.classList.toggle('scrolled',st>20);
+  toTop.classList.toggle('show',st>400);
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
 </script>
 </body>
 </html>
