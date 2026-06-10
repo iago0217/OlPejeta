@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pregnancy Diagnosis Analysis — Ol Pejeta × Haran</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0e1b14; --bg2:#12241a; --card:#142a1e; --line:#24382b;
+    --green:#6aa832; --green2:#3f7a2e; --gold:#d9c37a; --grey:#9aa0a6;
+    --white:#f4f4ef; --red:#c0552f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--white);font-family:'Segoe UI',Calibri,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  header{border-bottom:1px solid var(--line);background:rgba(10,18,13,.85);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+  .ol-mark{font-family:Arial,sans-serif;font-weight:800;font-size:18px}
+  .ol-mark .b{color:var(--green)} .ol-mark .g{color:var(--grey)}
+  .har-mark{font-family:Georgia,serif;text-align:right;line-height:1.05}
+  .har-mark .h{color:var(--gold);font-weight:700;font-size:18px;letter-spacing:1px}
+  .har-mark .s{color:var(--green2);font-size:8px;letter-spacing:3px;font-family:Arial,sans-serif}
+  .sep{width:1px;height:34px;background:var(--line)}
+  .tag{font-size:11px;color:var(--grey);letter-spacing:2px}
+
+  .hero{padding:54px 0 30px;text-align:center;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 320px at 50% -40%,rgba(106,168,50,.10),transparent)}
+  .kicker{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:700;font-family:Arial,sans-serif}
+  .hero h1{font-family:Georgia,serif;font-size:clamp(28px,5vw,46px);margin:10px 0 6px;font-weight:700}
+  .hero .sub{color:var(--green);font-style:italic;font-size:clamp(15px,2.4vw,20px)}
+  .hero .meta{color:var(--grey);font-size:13px;margin-top:16px}
+
+  section{padding:40px 0}
+  .sec-head{margin-bottom:22px}
+  .sec-head .kick{color:var(--gold);letter-spacing:3px;font-size:11px;font-weight:700;font-family:Arial,sans-serif}
+  .sec-head h2{font-family:Georgia,serif;font-size:clamp(22px,3vw,30px);margin-top:4px}
+  .sec-head .pt{color:var(--green);font-style:italic;font-size:14px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:22px 18px;position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
+  .kpi.gold::before{background:var(--gold)} .kpi.white::before{background:var(--white)}
+  .kpi .num{font-family:Georgia,serif;font-size:40px;font-weight:700;color:var(--green)}
+  .kpi.gold .num{color:var(--gold)} .kpi.white .num{color:var(--white)}
+  .kpi .lab{font-weight:700;font-size:14px;margin-top:4px}
+  .kpi .pt{color:var(--grey);font-style:italic;font-size:12px}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px}
+  .panel h3{font-family:Georgia,serif;font-size:18px;margin-bottom:2px}
+  .panel .pt{color:var(--green);font-style:italic;font-size:12.5px;margin-bottom:14px}
+  .canvas-box{position:relative;height:320px}
+  .note{color:var(--grey);font-size:12.5px;margin-top:12px;border-left:3px solid var(--gold);padding-left:10px}
+
+  .takes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .take{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .take .n{font-family:Georgia,serif;font-size:34px;color:var(--gold);font-weight:700}
+  .take .t{font-family:Georgia,serif;color:var(--green);font-weight:700;font-size:16px;margin:6px 0 6px}
+  .take .d{font-size:13px;color:var(--white)}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--grey);font-size:12.5px}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media(max-width:860px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:1fr}
+    .takes{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:480px){ .kpis,.takes{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <span class="tag">CLIENT</span>
+      <span class="ol-mark"><span class="b">OL PEJETA</span> <span class="g">BEEF</span></span>
+    </div>
+    <div class="brand">
+      <span class="tag">SERVICE PROVIDER</span>
+      <span class="sep"></span>
+      <span class="har-mark"><div class="h">HARAN</div><div class="s">REGENERATIVE SYSTEMS</div></span>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">TECHNICAL REPORT · RELATÓRIO TÉCNICO</div>
+    <h1>Pregnancy Diagnosis — Fixed-Time AI</h1>
+    <div class="sub">Diagnóstico de Gestação — IATF</div>
+    <div class="meta">June 2026 · Junho de 2026&nbsp;&nbsp;|&nbsp;&nbsp;n = 220 animals · 100% diagnosed</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="sec-head">
+      <div class="kick">OVERVIEW · VISÃO GERAL</div>
+      <h2>Overall diagnosis summary</h2>
+      <div class="pt">Resumo geral do diagnóstico</div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="num">84.1%</div><div class="lab">Pregnancy rate</div><div class="pt">Taxa de prenhez</div></div>
+      <div class="kpi gold"><div class="num">220</div><div class="lab">Diagnosed (100%)</div><div class="pt">Diagnosticados</div></div>
+      <div class="kpi white"><div class="num">185</div><div class="lab">Pregnant (AI + Bull)</div><div class="pt">Prenhes</div></div>
+      <div class="kpi"><div class="num">152</div><div class="lab">AI pregnancies (69.1%)</div><div class="pt">Prenhes via IA</div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:6px">
+    <div class="grid">
+
+      <div class="panel">
+        <h3>Diagnosis pipeline</h3>
+        <div class="pt">Pipeline do diagnóstico</div>
+        <div class="canvas-box"><canvas id="cPipe"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <h3>Result breakdown</h3>
+        <div class="pt">Composição do resultado: IA vs Touro vs Vazia</div>
+        <div class="canvas-box"><canvas id="cDonut"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <h3>Diagnosis by herd</h3>
+        <div class="pt">Diagnóstico por rebanho</div>
+        <div class="canvas-box"><canvas id="cHerd"></canvas></div>
+        <div class="note">ERIA/KAMUNGE leads at 87.6% pregnancy; Ajiot at 80.9%, with the highest number of empties (22).</div>
+      </div>
+
+      <div class="panel">
+        <h3>Pregnancy rate by inseminator</h3>
+        <div class="pt">Taxa de prenhez por inseminador</div>
+        <div class="canvas-box"><canvas id="cIns"></canvas></div>
+        <div class="note">Carlos V. Nascimento 85.0% · Fredrick O. Obondo 83.0% — balanced performance across the pair.</div>
+      </div>
+
+      <div class="panel">
+        <h3>AI efficiency by inseminator</h3>
+        <div class="pt">Eficiência da IA — % das prenhezes vindas da IA</div>
+        <div class="canvas-box"><canvas id="cEff"></canvas></div>
+        <div class="note">“% from AI” = share of each inseminator’s pregnancies that came from AI (not bull cleanup).</div>
+      </div>
+
+      <div class="panel">
+        <h3>Performance by bull (semen)</h3>
+        <div class="pt">Desempenho por touro (sêmen)</div>
+        <div class="canvas-box"><canvas id="cBull"></canvas></div>
+        <div class="note">Bars = AI pregnancies · Line = conception rate (pregnant ÷ inseminated).</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="kick">KEY TAKEAWAYS · CONCLUSÕES</div>
+      <h2>84.1% pregnancy across the batch</h2>
+      <div class="pt">220 animals, 100% diagnosed</div>
+    </div>
+    <div class="takes">
+      <div class="take"><div class="n">01</div><div class="t">Full coverage</div><div class="d">220 of 220 animals diagnosed (100%); 185 pregnant — an 84.1% rate.</div></div>
+      <div class="take"><div class="n">02</div><div class="t">AI-driven</div><div class="d">69.1% of pregnancies came from fixed-time AI; the bull accounted for just 15%.</div></div>
+      <div class="take"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminators at 83–85% pregnancy and ~68–70% AI efficiency.</div></div>
+      <div class="take"><div class="n">04</div><div class="t">Concentrated genetics</div><div class="d">Bulls 0037 and 1156/356 together make up 74% of AI pregnancies.</div></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="ol-mark"><span class="b">OL PEJETA</span> <span class="g">BEEF</span></span>
+    <span>prepared by · preparado por</span>
+    <span class="har-mark"><div class="h">HARAN</div><div class="s">REGENERATIVE SYSTEMS</div></span>
+  </div>
+</footer>
+
+<script>
+const GREEN='#6aa832',GREEN2='#3f7a2e',GOLD='#d9c37a',GREY='#9aa0a6',WHITE='#f4f4ef',RED='#c0552f',LINE='#24382b';
+Chart.defaults.color=WHITE;
+Chart.defaults.font.family="'Segoe UI',Calibri,sans-serif";
+Chart.defaults.font.size=13;
+const grid={color:LINE,drawBorder:false};
+const noGrid={display:false};
+const $=id=>document.getElementById(id);
+
+new Chart($('cPipe'),{type:'bar',data:{
+  labels:[['Herd size','Animais no lote'],['Diagnosed','Diagnosticados'],['Pregnant','Prenhe'],['Empty','Vazia']],
+  datasets:[{data:[220,220,185,35],backgroundColor:[GREY,GREEN2,GREEN,RED],borderRadius:6,maxBarThickness:90}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{grid,ticks:{precision:0}},x:{grid:noGrid}}}});
+
+new Chart($('cDonut'),{type:'doughnut',data:{
+  labels:['AI pregnant / Prenhe IA (152 · 69.1%)','Bull pregnant / Prenhe Touro (33 · 15.0%)','Empty / Vazia (35 · 15.9%)'],
+  datasets:[{data:[152,33,35],backgroundColor:[GREEN,GOLD,RED],borderColor:'#0e1b14',borderWidth:3}]},
+  options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,boxWidth:14}}}}});
+
+new Chart($('cHerd'),{type:'bar',data:{
+  labels:['Ajiot','ERIA/KAMUNGE'],
+  datasets:[
+   {label:'AI / IA',data:[82,70],backgroundColor:GREEN,stack:'s'},
+   {label:'Bull / Touro',data:[11,22],backgroundColor:GOLD,stack:'s'},
+   {label:'Empty / Vazia',data:[22,13],backgroundColor:RED,stack:'s'}]},
+  options:{plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}},
+   scales:{x:{stacked:true,grid:noGrid},y:{stacked:true,grid,ticks:{precision:0}}}}});
+
+new Chart($('cIns'),{data:{
+  labels:[['Carlos V.','Nascimento'],['Fredrick O.','Obondo']],
+  datasets:[
+   {type:'bar',label:'AI / IA',data:[84,68],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
+   {type:'bar',label:'Bull / Touro',data:[18,15],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
+   {type:'bar',label:'Empty / Vazia',data:[18,17],backgroundColor:RED,stack:'s',yAxisID:'y'},
+   {type:'line',label:'Pregnancy rate / Taxa',data:[85.0,83.0],borderColor:WHITE,backgroundColor:WHITE,
+     yAxisID:'y1',tension:.3,pointRadius:5,pointBackgroundColor:WHITE}]},
+  options:{plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
+   scales:{x:{stacked:true,grid:noGrid},
+     y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animals'}},
+     y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'rate'}}}}});
+
+new Chart($('cEff'),{type:'bar',data:{
+  labels:['Carlos V. Nascimento','Fredrick O. Obondo'],
+  datasets:[{data:[70,68],backgroundColor:[GREEN,GREEN2],borderRadius:6,maxBarThickness:46}]},
+  options:{indexAxis:'y',plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>c.parsed.x+'% of pregnancies from AI'}}},
+   scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'}},y:{grid:noGrid}}}});
+
+new Chart($('cBull'),{data:{
+  labels:['0037','1156/356','652',['KPO 1971','...23SE12']],
+  datasets:[
+   {type:'bar',label:'AI pregnancies / Prenhes IA',data:[69,44,28,11],
+     backgroundColor:[GREEN,GREEN2,GOLD,'#7a6a3a'],borderRadius:6,yAxisID:'y',maxBarThickness:70},
+   {type:'line',label:'Conception rate / Concepção',data:[66.3,74.6,68.3,78.6],
+     borderColor:WHITE,backgroundColor:WHITE,yAxisID:'y1',tension:.3,pointRadius:5,pointBackgroundColor:WHITE}]},
+  options:{plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
+   scales:{x:{grid:noGrid},
+     y:{position:'left',grid,ticks:{precision:0},title:{display:true,text:'pregnancies'}},
+     y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'conception'}}}}});
+</script>
+</body>
+</html>
