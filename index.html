@@ -69,7 +69,21 @@
     .grid{grid-template-columns:1fr}
     .takes{grid-template-columns:repeat(2,1fr)}
   }
-  @media(max-width:480px){ .kpis,.takes{grid-template-columns:1fr} }
+  @media(max-width:560px){
+    .wrap{padding:0 16px}
+    .topbar{flex-direction:column;align-items:stretch;gap:12px;padding:12px 0}
+    .brand{justify-content:space-between;width:100%}
+    .hero{padding:34px 0 24px}
+    section{padding:28px 0}
+    .kpi{padding:18px 14px}
+    .kpi .num{font-size:32px}
+    .take .n{font-size:28px}
+    .canvas-box{height:260px}
+    .panel{padding:16px 14px 14px}
+    .foot-row{flex-direction:column;align-items:flex-start;gap:6px}
+    .foot-row .har-mark{text-align:left}
+  }
+  @media(max-width:380px){ .kpis,.takes{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -188,6 +202,8 @@ const GREEN='#6aa832',GREEN2='#3f7a2e',GOLD='#d9c37a',GREY='#9aa0a6',WHITE='#f4f
 Chart.defaults.color=WHITE;
 Chart.defaults.font.family="'Segoe UI',Calibri,sans-serif";
 Chart.defaults.font.size=13;
+Chart.defaults.maintainAspectRatio=false;
+Chart.defaults.responsive=true;
 const grid={color:LINE,drawBorder:false};
 const noGrid={display:false};
 const $=id=>document.getElementById(id);
