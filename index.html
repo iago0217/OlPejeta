@@ -200,10 +200,10 @@
       </div>
 
       <div class="panel reveal">
-        <h3>Performance by bull (semen)</h3>
-        <div class="pt">Desempenho por touro (sêmen)</div>
+        <h3>Conception rate by bull (semen)</h3>
+        <div class="pt">Taxa de prenhez por touro (sêmen) — ordenado pela taxa</div>
         <div class="canvas-box"><canvas id="cBull"></canvas></div>
-        <div class="note">Bars = AI pregnancies · Line = conception rate (pregnant ÷ inseminated).</div>
+        <div class="note">Barra = taxa de concepção (prenhe ÷ inseminada) · n = nº de prenhes via IA. KPO 1971 lidera em taxa (78.6%), mas sobre apenas 11 IA; 1156/356 é o mais forte em escala (74.6% em 44). 0037 tem o maior volume (69) a 66.3%.</div>
       </div>
 
     </div>
@@ -291,17 +291,36 @@ const charts={
       tooltip:{callbacks:{label:c=>c.parsed.x+'% of pregnancies from AI'}}},
      scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'}},y:{grid:noGrid}}}}),
 
-  cBull:()=>new Chart($('cBull'),{data:{
-    labels:['0037','1156/356','652',['KPO 1971','...23SE12']],
-    datasets:[
-     {type:'bar',label:'AI pregnancies / Prenhes IA',data:[69,44,28,11],
-       backgroundColor:[GREEN,GREEN2,GOLD,'#7a6a3a'],borderRadius:6,yAxisID:'y',maxBarThickness:70},
-     {type:'line',label:'Conception rate / Concepção',data:[66.3,74.6,68.3,78.6],
-       borderColor:WHITE,backgroundColor:WHITE,yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE}]},
-    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
-     scales:{x:{grid:noGrid},
-       y:{position:'left',grid,ticks:{precision:0},title:{display:true,text:'pregnancies'}},
-       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'conception'}}}}})
+  cBull:()=>{
+    /* ordenado da MAIOR para a MENOR taxa de concepção */
+    const labels=[['KPO 1971','…23SE12'],'1156/356','652','0037'];
+    const rates =[78.6,74.6,68.3,66.3];
+    const counts=[11,44,28,69];
+    /* verde mais forte = taxa maior */
+    const colors=['#6aa832','#5e9a2e','#4f8a2c','#3f7a2e'];
+    /* desenha a taxa no fim da barra e o volume (n) na base */
+    const labelPlug={id:'bullLabels',afterDatasetsDraw(c){
+      const ctx=c.ctx, meta=c.getDatasetMeta(0);
+      ctx.save();ctx.textBaseline='middle';
+      meta.data.forEach((bar,i)=>{
+        ctx.font='700 15px "Segoe UI",sans-serif';ctx.fillStyle=WHITE;ctx.textAlign='left';
+        ctx.fillText(rates[i].toFixed(1)+'%',bar.x+8,bar.y);
+        ctx.font='12px "Segoe UI",sans-serif';ctx.fillStyle='rgba(244,244,239,.85)';
+        ctx.fillText('n='+counts[i]+' IA',c.scales.x.left+10,bar.y);
+      });
+      ctx.restore();
+    }};
+    return new Chart($('cBull'),{type:'bar',plugins:[labelPlug],data:{
+      labels,
+      datasets:[{label:'Taxa de concepção',data:rates,backgroundColor:colors,
+        borderRadius:6,maxBarThickness:46,hoverBackgroundColor:GOLD}]},
+      options:{animation:anim,indexAxis:'y',layout:{padding:{right:54}},
+       plugins:{legend:{display:false},
+         tooltip:{callbacks:{label:c=>`Taxa: ${rates[c.dataIndex].toFixed(1)}%  ·  ${counts[c.dataIndex]} prenhes via IA`}}},
+       scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},
+           title:{display:true,text:'taxa de concepção / conception rate'}},
+         y:{grid:noGrid}}}});
+  }
 };
 
 /* lazy-init each chart the first time its panel scrolls into view */
