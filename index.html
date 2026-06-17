@@ -16,7 +16,6 @@
   body{background:var(--bg);color:var(--white);font-family:'Segoe UI',Calibri,system-ui,sans-serif;line-height:1.5;overflow-x:hidden}
   .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 
-  /* scroll progress bar */
   #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;
     background:linear-gradient(90deg,var(--green),var(--gold));box-shadow:0 0 8px rgba(106,168,50,.6);transition:width .08s linear}
 
@@ -52,7 +51,7 @@
   .kpi:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.35);border-color:var(--green)}
   .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
   .kpi.gold::before{background:var(--gold)} .kpi.white::before{background:var(--white)}
-  .kpi .num{font-family:Georgia,serif;font-size:40px;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums}
+  .kpi .num{font-family:Georgia,serif;font-size:38px;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums}
   .kpi.gold .num{color:var(--gold)} .kpi.white .num{color:var(--white)}
   .kpi .lab{font-weight:700;font-size:14px;margin-top:4px}
   .kpi .pt{color:var(--grey);font-style:italic;font-size:12px}
@@ -61,9 +60,12 @@
   .panel{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px;
     transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
   .panel:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.30);border-color:var(--green2)}
+  .panel.span2{grid-column:1 / -1}
   .panel h3{font-family:Georgia,serif;font-size:18px;margin-bottom:2px}
   .panel .pt{color:var(--green);font-style:italic;font-size:12.5px;margin-bottom:14px}
   .canvas-box{position:relative;height:320px}
+  .canvas-box.tall{height:400px}
+  .canvas-box.xtall{height:460px}
   .note{color:var(--grey);font-size:12.5px;margin-top:12px;border-left:3px solid var(--gold);padding-left:10px}
 
   .takes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -74,12 +76,15 @@
   .take .t{font-family:Georgia,serif;color:var(--green);font-weight:700;font-size:16px;margin:6px 0 6px}
   .take .d{font-size:13px;color:var(--white)}
 
-  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--grey);font-size:12.5px}
+  .method{max-width:1180px;margin:0 auto;padding:0 22px 10px}
+  .method .box{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--grey);font-size:12px;line-height:1.6}
+  .method b{color:var(--white)}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--grey);font-size:12.5px;margin-top:20px}
   .foot-row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
   .foot-ol{height:48px;width:auto}
   .foot-haran{height:42px;width:auto;border:1px solid var(--line);border-radius:8px;background:#0c1712;padding:3px 6px}
 
-  /* back to top */
   #toTop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border:none;border-radius:50%;
     background:var(--green);color:#0e1b14;font-size:22px;font-weight:700;cursor:pointer;z-index:40;
     box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;
@@ -87,7 +92,6 @@
   #toTop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
   #toTop:hover{background:var(--gold)}
 
-  /* scroll reveal */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
 
@@ -95,6 +99,7 @@
     .kpis{grid-template-columns:repeat(2,1fr)}
     .grid{grid-template-columns:1fr}
     .takes{grid-template-columns:repeat(2,1fr)}
+    .panel.span2{grid-column:auto}
   }
   @media(max-width:560px){
     .wrap{padding:0 16px}
@@ -105,9 +110,10 @@
     .hero-logo{height:88px}
     section{padding:28px 0}
     .kpi{padding:18px 14px}
-    .kpi .num{font-size:32px}
+    .kpi .num{font-size:30px}
     .take .n{font-size:28px}
-    .canvas-box{height:260px}
+    .canvas-box{height:280px}
+    .canvas-box.tall,.canvas-box.xtall{height:440px}
     .panel{padding:16px 14px 14px}
     .foot-row{flex-direction:column;align-items:flex-start;gap:12px}
   }
@@ -142,8 +148,8 @@
     <img class="hero-logo" src="assets/ol-pejeta-beef.png" alt="Ol Pejeta Beef">
     <div class="kicker">TECHNICAL REPORT · RELATÓRIO TÉCNICO</div>
     <h1>Pregnancy Diagnosis — Fixed-Time AI</h1>
-    <div class="sub">Diagnóstico de Gestação — IATF</div>
-    <div class="meta">June 2026 · Junho de 2026&nbsp;&nbsp;|&nbsp;&nbsp;n = 220 animals · 100% diagnosed</div>
+    <div class="sub">Diagnóstico de Gestação — IATF + monta natural</div>
+    <div class="meta">2026 &nbsp;|&nbsp; n = 1.244 animais diagnosticados · 954 IATF + 290 monta natural</div>
   </div>
 </div>
 
@@ -156,10 +162,10 @@
       <div class="pt">Resumo geral do diagnóstico</div>
     </div>
     <div class="kpis">
-      <div class="kpi reveal"><div class="num" data-target="84.1" data-dec="1" data-suffix="%">0</div><div class="lab">Pregnancy rate</div><div class="pt">Taxa de prenhez</div></div>
-      <div class="kpi gold reveal"><div class="num" data-target="220">0</div><div class="lab">Diagnosed (100%)</div><div class="pt">Diagnosticados</div></div>
-      <div class="kpi white reveal"><div class="num" data-target="185">0</div><div class="lab">Pregnant (AI + Bull)</div><div class="pt">Prenhes</div></div>
-      <div class="kpi reveal"><div class="num" data-target="152">0</div><div class="lab">AI pregnancies (69.1%)</div><div class="pt">Prenhes via IA</div></div>
+      <div class="kpi reveal"><div class="num" data-target="66.7" data-dec="1" data-suffix="%">0</div><div class="lab">Overall pregnancy rate</div><div class="pt">Taxa de prenhez geral (830/1.244)</div></div>
+      <div class="kpi gold reveal"><div class="num" data-target="1244">0</div><div class="lab">Animals diagnosed</div><div class="pt">Animais diagnosticados</div></div>
+      <div class="kpi white reveal"><div class="num" data-target="45.4" data-dec="1" data-suffix="%">0</div><div class="lab">AI conception (IATF)</div><div class="pt">Concepção por IA — 433/954</div></div>
+      <div class="kpi reveal"><div class="num" data-target="63.2" data-dec="1" data-suffix="%">0</div><div class="lab">IATF pregnancy rate</div><div class="pt">Prenhez na IATF — 603/954</div></div>
     </div>
   </section>
 
@@ -167,43 +173,43 @@
     <div class="grid">
 
       <div class="panel reveal">
-        <h3>Diagnosis pipeline</h3>
-        <div class="pt">Pipeline do diagnóstico</div>
+        <h3>Diagnosis pipeline (IATF)</h3>
+        <div class="pt">Funil do diagnóstico — coorte inseminada</div>
         <div class="canvas-box"><canvas id="cPipe"></canvas></div>
       </div>
 
       <div class="panel reveal">
-        <h3>Result breakdown</h3>
+        <h3>Result breakdown (IATF)</h3>
         <div class="pt">Composição do resultado: IA vs Touro vs Vazia</div>
         <div class="canvas-box"><canvas id="cDonut"></canvas></div>
       </div>
 
       <div class="panel reveal">
-        <h3>Diagnosis by herd</h3>
-        <div class="pt">Diagnóstico por rebanho</div>
-        <div class="canvas-box"><canvas id="cHerd"></canvas></div>
-        <div class="note">ERIA/KAMUNGE leads at 87.6% pregnancy; Ajiot at 80.9%, with the highest number of empties (22).</div>
+        <h3>IATF vs natural service</h3>
+        <div class="pt">IATF (954) vs monta natural (290) — resultado do diagnóstico</div>
+        <div class="canvas-box"><canvas id="cCohort"></canvas></div>
+        <div class="note">A monta natural teve prenhez maior (78.3% vs 63.2%), mas quase toda por touro (199 de 227). A IATF entrega genética de IA: 433 prenhes via IA.</div>
       </div>
 
       <div class="panel reveal">
         <h3>Pregnancy rate by inseminator</h3>
-        <div class="pt">Taxa de prenhez por inseminador</div>
+        <div class="pt">Taxa de prenhez por inseminador (IATF)</div>
         <div class="canvas-box"><canvas id="cIns"></canvas></div>
-        <div class="note">Carlos V. Nascimento 85.0% · Fredrick O. Obondo 83.0% — balanced performance across the pair.</div>
+        <div class="note">Desempenho equilibrado: Fredrick 69.3% e Carlos 68.6% de prenhez; concepção por IA de 51.7% e 48.9%.</div>
       </div>
 
-      <div class="panel reveal">
-        <h3>AI efficiency by inseminator</h3>
-        <div class="pt">Eficiência da IA — % das prenhezes vindas da IA</div>
-        <div class="canvas-box"><canvas id="cEff"></canvas></div>
-        <div class="note">“% from AI” = share of each inseminator’s pregnancies that came from AI (not bull cleanup).</div>
+      <div class="panel span2 reveal">
+        <h3>Pregnancy rate by herd</h3>
+        <div class="pt">Taxa de prenhez por lote — ordenado da maior para a menor</div>
+        <div class="canvas-box tall"><canvas id="cHerd"></canvas></div>
+        <div class="note">Barra = % prenhe · n = animais diagnosticados no lote. Elea (85.8%) e Kamungue (85.2%) lideram; Mburu/Leiyangiri (30.4%) e Kaberia (36.7%) ficam bem abaixo — candidatos a revisão de manejo nutricional/sanitário.</div>
       </div>
 
-      <div class="panel reveal">
+      <div class="panel span2 reveal">
         <h3>Conception rate by bull (semen)</h3>
-        <div class="pt">Taxa de prenhez por touro (sêmen) — ordenado pela taxa</div>
-        <div class="canvas-box"><canvas id="cBull"></canvas></div>
-        <div class="note">Barra = taxa de concepção (prenhe ÷ inseminada) · n = nº de prenhes via IA. KPO 1971 lidera em taxa (78.6%), mas sobre apenas 11 IA; 1156/356 é o mais forte em escala (74.6% em 44). 0037 tem o maior volume (69) a 66.3%.</div>
+        <div class="pt">Taxa de concepção por touro (sêmen) — IA ÷ inseminadas, ordenado pela taxa</div>
+        <div class="canvas-box xtall"><canvas id="cBull"></canvas></div>
+        <div class="note">Apenas touros com n ≥ 20. Barra = taxa de concepção por IA · n = animais inseminados com o sêmen. KPO 1955 (82.6%), KPO 1971 (75.0%), 1156/356 (74.6%) e BO 1182/786 (72.9%) puxam o resultado; 1912 (19.2%) e 322/956 (23.8%) destroem a média e devem sair do programa.</div>
       </div>
 
     </div>
@@ -212,17 +218,26 @@
   <section>
     <div class="sec-head reveal">
       <div class="kick">KEY TAKEAWAYS · CONCLUSÕES</div>
-      <h2>84.1% pregnancy across the batch</h2>
-      <div class="pt">220 animals, 100% diagnosed</div>
+      <h2>66.7% overall pregnancy · 1.244 diagnosed</h2>
+      <div class="pt">Duas coortes: IATF e monta natural</div>
     </div>
     <div class="takes">
-      <div class="take reveal"><div class="n">01</div><div class="t">Full coverage</div><div class="d">220 of 220 animals diagnosed (100%); 185 pregnant — an 84.1% rate.</div></div>
-      <div class="take reveal"><div class="n">02</div><div class="t">AI-driven</div><div class="d">69.1% of pregnancies came from fixed-time AI; the bull accounted for just 15%.</div></div>
-      <div class="take reveal"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminators at 83–85% pregnancy and ~68–70% AI efficiency.</div></div>
-      <div class="take reveal"><div class="n">04</div><div class="t">Concentrated genetics</div><div class="d">Bulls 0037 and 1156/356 together make up 74% of AI pregnancies.</div></div>
+      <div class="take reveal"><div class="n">01</div><div class="t">Full coverage</div><div class="d">1.244 animais diagnosticados — 954 via IATF e 290 em monta natural. 830 prenhes no total (66.7%).</div></div>
+      <div class="take reveal"><div class="n">02</div><div class="t">AI-driven (IATF)</div><div class="d">A IATF atingiu 63.2% de prenhez; só a IA entregou 45.4% de concepção — 71.8% das prenhezes da IATF. O touro de repasse somou 17.8%.</div></div>
+      <div class="take reveal"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminadores alinhados: Fredrick 51.7% e Carlos 48.9% de concepção por IA, ~69% de prenhez cada.</div></div>
+      <div class="take reveal"><div class="n">04</div><div class="t">Spread to act on</div><div class="d">Grande amplitude: touros de 82.6% (KPO 1955) a 19.2% (1912) e lotes de 85.8% (Elea) a 30.4% (Mburu) — espaço claro para seleção de sêmen e manejo.</div></div>
     </div>
   </section>
 
+</div>
+
+<div class="method">
+  <div class="box reveal">
+    <b>Metodologia / Methodology.</b> Fonte: planilha <b>Pasta2.xlsx</b> (abas DG, Inseminação, Sem Inseminação).
+    Coorte IATF = 954 animais inseminados e diagnosticados; monta natural = 290 não inseminados.
+    Concepção por IA = «Pregnant AI» ÷ total da categoria. Touro de repasse = «Pregnant Bull».
+    <b>122 animais da IATF (12.8%)</b> não tinham inseminador/touro/lote registrados: entram nos totais, mas ficam fora dos recortes por inseminador, lote e touro. Alguns códigos de touro aparecem grafados de forma inconsistente.
+  </div>
 </div>
 
 <footer>
@@ -244,133 +259,114 @@ Chart.defaults.maintainAspectRatio=false;
 Chart.defaults.responsive=true;
 const $=id=>document.getElementById(id);
 const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-/* ---------- chart factories (built lazily on scroll into view) ---------- */
-const grid={color:LINE,drawBorder:false};
-const noGrid={display:false};
+const grid={color:LINE,drawBorder:false}, noGrid={display:false};
 const anim=reduce?false:{duration:900,easing:'easeOutQuart'};
+/* verde (bom) → dourado (médio) → vermelho (ruim) conforme a taxa */
+const rateColor=r=>r>=70?GREEN:r>=55?GOLD:RED;
+
+/* ----- dados reais extraídos de Pasta2.xlsx (coorte IATF / aba DG) ----- */
+const HERD=[
+ {k:'Elea',n:106,preg:85.8},{k:'Kamungue',n:122,preg:85.2},{k:'Mohamed',n:46,preg:84.8},
+ {k:'Ajihaf',n:117,preg:81.2},{k:'Barusei/Ngiricho',n:136,preg:73.5},{k:'Kibet/Naupe',n:70,preg:65.7},
+ {k:'Nakoslonyui',n:66,preg:56.1},{k:'Mohammed/Osman',n:37,preg:45.9},{k:'Kaberia',n:90,preg:36.7},
+ {k:'Mburu/Leiyangiri',n:56,preg:30.4}];
+const BULL=[
+ {k:'KPO 1955',n:23,r:82.6},{k:'KPO 1971',n:32,r:75.0},{k:'1156/356',n:59,r:74.6},
+ {k:'BO 1182/786',n:59,r:72.9},{k:'KPO 1936',n:44,r:68.2},{k:'652',n:50,r:68.0},
+ {k:'0037',n:106,r:65.1},{k:"KPO 1673'22",n:45,r:42.2},{k:'1673',n:155,r:39.4},
+ {k:'1485/1057',n:36,r:33.3},{k:'322/956',n:101,r:23.8},{k:'1912',n:73,r:19.2}];
+
+/* plugin: rótulo da taxa no fim da barra + volume (n) na base (barras horizontais) */
+const hLabels=(vals,counts)=>({id:'hLabels',afterDatasetsDraw(c){
+  const ctx=c.ctx, meta=c.getDatasetMeta(0); ctx.save(); ctx.textBaseline='middle';
+  meta.data.forEach((bar,i)=>{
+    ctx.font='700 13px "Segoe UI",sans-serif';ctx.fillStyle=WHITE;ctx.textAlign='left';
+    ctx.fillText(vals[i].toFixed(1)+'%',bar.x+8,bar.y);
+    ctx.font='11px "Segoe UI",sans-serif';ctx.fillStyle='rgba(244,244,239,.85)';
+    ctx.fillText('n='+counts[i],c.scales.x.left+8,bar.y);
+  }); ctx.restore();
+}});
 
 const charts={
   cPipe:()=>new Chart($('cPipe'),{type:'bar',data:{
-    labels:[['Herd size','Animais no lote'],['Diagnosed','Diagnosticados'],['Pregnant','Prenhe'],['Empty','Vazia']],
-    datasets:[{data:[220,220,185,35],backgroundColor:[GREY,GREEN2,GREEN,RED],borderRadius:6,maxBarThickness:90}]},
+    labels:[['Inseminated','Inseminadas'],['Pregnant','Prenhe'],['AI preg.','Prenhe IA'],['Bull preg.','Prenhe touro'],['Empty','Vazia']],
+    datasets:[{data:[954,603,433,170,351],backgroundColor:[GREY,GREEN,GREEN,GOLD,RED],borderRadius:6,maxBarThickness:78}]},
     options:{animation:anim,plugins:{legend:{display:false}},scales:{y:{grid,ticks:{precision:0}},x:{grid:noGrid}}}}),
 
   cDonut:()=>new Chart($('cDonut'),{type:'doughnut',data:{
-    labels:['AI pregnant / Prenhe IA (152 · 69.1%)','Bull pregnant / Prenhe Touro (33 · 15.0%)','Empty / Vazia (35 · 15.9%)'],
-    datasets:[{data:[152,33,35],backgroundColor:[GREEN,GOLD,RED],borderColor:'#0e1b14',borderWidth:3,hoverOffset:10}]},
+    labels:['Prenhe IA / AI (433 · 45.4%)','Prenhe Touro / Bull (170 · 17.8%)','Vazia / Empty (351 · 36.8%)'],
+    datasets:[{data:[433,170,351],backgroundColor:[GREEN,GOLD,RED],borderColor:'#0e1b14',borderWidth:3,hoverOffset:10}]},
     options:{animation:reduce?false:{animateRotate:true,duration:1100},cutout:'62%',
-      plugins:{legend:{position:'bottom',labels:{padding:14,boxWidth:14}}}}}),
+      plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}}}}),
 
-  cHerd:()=>new Chart($('cHerd'),{type:'bar',data:{
-    labels:['Ajiot','ERIA/KAMUNGE'],
+  cCohort:()=>new Chart($('cCohort'),{type:'bar',data:{
+    labels:[['IATF','(inseminadas · 954)'],['Monta natural','(sem IA · 290)']],
     datasets:[
-     {label:'AI / IA',data:[82,70],backgroundColor:GREEN,stack:'s'},
-     {label:'Bull / Touro',data:[11,22],backgroundColor:GOLD,stack:'s'},
-     {label:'Empty / Vazia',data:[22,13],backgroundColor:RED,stack:'s'}]},
-    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}},
+     {label:'Prenhe IA / AI',data:[433,28],backgroundColor:GREEN,stack:'s'},
+     {label:'Prenhe touro / Bull',data:[170,199],backgroundColor:GOLD,stack:'s'},
+     {label:'Vazia / Empty',data:[351,63],backgroundColor:RED,stack:'s'}]},
+    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}},
+      tooltip:{callbacks:{footer:items=>{const t=items.reduce((s,i)=>s+i.parsed.y,0);return 'Total: '+t;}}}},
      scales:{x:{stacked:true,grid:noGrid},y:{stacked:true,grid,ticks:{precision:0}}}}}),
 
   cIns:()=>new Chart($('cIns'),{data:{
     labels:[['Carlos V.','Nascimento'],['Fredrick O.','Obondo']],
     datasets:[
-     {type:'bar',label:'AI / IA',data:[84,68],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
-     {type:'bar',label:'Bull / Touro',data:[18,15],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
-     {type:'bar',label:'Empty / Vazia',data:[18,17],backgroundColor:RED,stack:'s',yAxisID:'y'},
-     {type:'line',label:'Pregnancy rate / Taxa',data:[85.0,83.0],borderColor:WHITE,backgroundColor:WHITE,
+     {type:'bar',label:'Prenhe IA / AI',data:[232,185],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Prenhe touro / Bull',data:[93,63],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Vazia / Empty',data:[149,110],backgroundColor:RED,stack:'s',yAxisID:'y'},
+     {type:'line',label:'Taxa de prenhez / rate',data:[68.6,69.3],borderColor:WHITE,backgroundColor:WHITE,
        yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE}]},
     options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
      scales:{x:{stacked:true,grid:noGrid},
-       y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animals'}},
-       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'rate'}}}}}),
+       y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animais'}},
+       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa'}}}}}),
 
-  cEff:()=>new Chart($('cEff'),{type:'bar',data:{
-    labels:['Carlos V. Nascimento','Fredrick O. Obondo'],
-    datasets:[{data:[70,68],backgroundColor:[GREEN,GREEN2],borderRadius:6,maxBarThickness:46}]},
-    options:{animation:anim,indexAxis:'y',plugins:{legend:{display:false},
-      tooltip:{callbacks:{label:c=>c.parsed.x+'% of pregnancies from AI'}}},
-     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'}},y:{grid:noGrid}}}}),
+  cHerd:()=>new Chart($('cHerd'),{type:'bar',plugins:[hLabels(HERD.map(h=>h.preg),HERD.map(h=>h.n))],data:{
+    labels:HERD.map(h=>h.k),
+    datasets:[{data:HERD.map(h=>h.preg),backgroundColor:HERD.map(h=>rateColor(h.preg)),borderRadius:5,maxBarThickness:30,hoverBackgroundColor:GREEN}]},
+    options:{animation:anim,indexAxis:'y',layout:{padding:{right:48}},
+     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`Prenhez: ${HERD[c.dataIndex].preg}%  ·  n=${HERD[c.dataIndex].n}`}}},
+     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'% prenhe / pregnancy rate'}},y:{grid:noGrid}}}}),
 
-  cBull:()=>{
-    /* ordenado da MAIOR para a MENOR taxa de concepção */
-    const labels=[['KPO 1971','…23SE12'],'1156/356','652','0037'];
-    const rates =[78.6,74.6,68.3,66.3];
-    const counts=[11,44,28,69];
-    /* verde mais forte = taxa maior */
-    const colors=['#6aa832','#5e9a2e','#4f8a2c','#3f7a2e'];
-    /* desenha a taxa no fim da barra e o volume (n) na base */
-    const labelPlug={id:'bullLabels',afterDatasetsDraw(c){
-      const ctx=c.ctx, meta=c.getDatasetMeta(0);
-      ctx.save();ctx.textBaseline='middle';
-      meta.data.forEach((bar,i)=>{
-        ctx.font='700 15px "Segoe UI",sans-serif';ctx.fillStyle=WHITE;ctx.textAlign='left';
-        ctx.fillText(rates[i].toFixed(1)+'%',bar.x+8,bar.y);
-        ctx.font='12px "Segoe UI",sans-serif';ctx.fillStyle='rgba(244,244,239,.85)';
-        ctx.fillText('n='+counts[i]+' IA',c.scales.x.left+10,bar.y);
-      });
-      ctx.restore();
-    }};
-    return new Chart($('cBull'),{type:'bar',plugins:[labelPlug],data:{
-      labels,
-      datasets:[{label:'Taxa de concepção',data:rates,backgroundColor:colors,
-        borderRadius:6,maxBarThickness:46,hoverBackgroundColor:GOLD}]},
-      options:{animation:anim,indexAxis:'y',layout:{padding:{right:54}},
-       plugins:{legend:{display:false},
-         tooltip:{callbacks:{label:c=>`Taxa: ${rates[c.dataIndex].toFixed(1)}%  ·  ${counts[c.dataIndex]} prenhes via IA`}}},
-       scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},
-           title:{display:true,text:'taxa de concepção / conception rate'}},
-         y:{grid:noGrid}}}});
-  }
+  cBull:()=>new Chart($('cBull'),{type:'bar',plugins:[hLabels(BULL.map(b=>b.r),BULL.map(b=>b.n))],data:{
+    labels:BULL.map(b=>b.k),
+    datasets:[{data:BULL.map(b=>b.r),backgroundColor:BULL.map(b=>rateColor(b.r)),borderRadius:5,maxBarThickness:28,hoverBackgroundColor:GOLD}]},
+    options:{animation:anim,indexAxis:'y',layout:{padding:{right:52}},
+     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`Concepção IA: ${BULL[c.dataIndex].r}%  ·  ${BULL[c.dataIndex].n} inseminadas`}}},
+     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa de concepção / conception rate'}},y:{grid:noGrid}}}})
 };
 
-/* lazy-init each chart the first time its panel scrolls into view */
-const chartObs=new IntersectionObserver((entries,obs)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const id=e.target.id;
-      if(charts[id]){ charts[id](); delete charts[id]; }
-      obs.unobserve(e.target);
-    }
-  });
-},{rootMargin:'0px 0px -10% 0px',threshold:.15});
+/* lazy-init: cada gráfico só é criado/animado ao entrar na tela */
+const chartObs=new IntersectionObserver((es,obs)=>{es.forEach(e=>{
+  if(e.isIntersecting){const id=e.target.id; if(charts[id]){charts[id]();delete charts[id];} obs.unobserve(e.target);}
+});},{rootMargin:'0px 0px -10% 0px',threshold:.15});
 Object.keys(charts).forEach(id=>chartObs.observe($(id)));
 
-/* ---------- scroll reveal (staggered) ---------- */
-const revObs=new IntersectionObserver((entries,obs)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
-  });
-},{rootMargin:'0px 0px -8% 0px',threshold:.12});
-document.querySelectorAll('.reveal').forEach((el,i)=>{
-  el.style.transitionDelay=(Math.min(i,6)*70)+'ms';
-  revObs.observe(el);
-});
+/* scroll reveal (com stagger) */
+const revObs=new IntersectionObserver((es,obs)=>{es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+});},{rootMargin:'0px 0px -8% 0px',threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i,6)*70)+'ms';revObs.observe(el);});
 
-/* ---------- animated KPI counters ---------- */
+/* contadores animados dos KPIs */
+const fmt=(n,dec)=>dec>0?n.toFixed(dec):Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 function animateCount(el){
-  const target=parseFloat(el.dataset.target);
-  const dec=parseInt(el.dataset.dec||'0',10);
-  const suffix=el.dataset.suffix||'';
-  if(reduce){ el.textContent=target.toFixed(dec)+suffix; return; }
-  const dur=1400, t0=performance.now();
-  const ease=t=>1-Math.pow(1-t,3);
-  function step(now){
-    const p=Math.min((now-t0)/dur,1);
-    el.textContent=(target*ease(p)).toFixed(dec)+suffix;
-    if(p<1) requestAnimationFrame(step);
-    else el.textContent=target.toFixed(dec)+suffix;
-  }
-  requestAnimationFrame(step);
+  const target=parseFloat(el.dataset.target),dec=parseInt(el.dataset.dec||'0',10),suf=el.dataset.suffix||'';
+  if(reduce){el.textContent=fmt(target,dec)+suf;return;}
+  const dur=1400,t0=performance.now(),ease=t=>1-Math.pow(1-t,3);
+  (function step(now){const p=Math.min((now-t0)/dur,1);
+    el.textContent=fmt(target*ease(p),dec)+suf;
+    if(p<1)requestAnimationFrame(step); else el.textContent=fmt(target,dec)+suf;
+  })(t0);
 }
-const countObs=new IntersectionObserver((entries,obs)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ animateCount(e.target); obs.unobserve(e.target); }
-  });
-},{threshold:.6});
+const countObs=new IntersectionObserver((es,obs)=>{es.forEach(e=>{
+  if(e.isIntersecting){animateCount(e.target);obs.unobserve(e.target);}
+});},{threshold:.6});
 document.querySelectorAll('.kpi .num[data-target]').forEach(el=>countObs.observe(el));
 
-/* ---------- scroll progress bar + sticky header shrink + back-to-top ---------- */
-const bar=$('progress'), head=document.querySelector('header'), toTop=$('toTop');
+/* barra de progresso + header shrink + voltar ao topo */
+const bar=$('progress'),head=document.querySelector('header'),toTop=$('toTop');
 function onScroll(){
   const st=window.scrollY||document.documentElement.scrollTop;
   const h=document.documentElement.scrollHeight-window.innerHeight;
@@ -378,8 +374,7 @@ function onScroll(){
   head.classList.toggle('scrolled',st>20);
   toTop.classList.toggle('show',st>400);
 }
-window.addEventListener('scroll',onScroll,{passive:true});
-onScroll();
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
 </script>
 </body>
