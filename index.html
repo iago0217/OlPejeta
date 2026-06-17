@@ -148,8 +148,8 @@
     <img class="hero-logo" src="assets/ol-pejeta-beef.png" alt="Ol Pejeta Beef">
     <div class="kicker">TECHNICAL REPORT · RELATÓRIO TÉCNICO</div>
     <h1>Pregnancy Diagnosis — Fixed-Time AI</h1>
-    <div class="sub">Diagnóstico de Gestação — IATF + monta natural</div>
-    <div class="meta">2026 &nbsp;|&nbsp; n = 1.244 animais diagnosticados · 954 IATF + 290 monta natural</div>
+    <div class="sub">Diagnóstico de Gestação — coorte inseminada (IATF)</div>
+    <div class="meta">2026 &nbsp;|&nbsp; universo principal: 954 animais inseminados &nbsp;·&nbsp; experimento de ciclicidade: lote Kindelál (40)</div>
   </div>
 </div>
 
@@ -158,14 +158,14 @@
   <section>
     <div class="sec-head reveal">
       <div class="kick">OVERVIEW · VISÃO GERAL</div>
-      <h2>Overall diagnosis summary</h2>
-      <div class="pt">Resumo geral do diagnóstico</div>
+      <h2>Inseminated cohort — diagnosis</h2>
+      <div class="pt">Coorte inseminada (DG) — 954 animais</div>
     </div>
     <div class="kpis">
-      <div class="kpi reveal"><div class="num" data-target="66.7" data-dec="1" data-suffix="%">0</div><div class="lab">Overall pregnancy rate</div><div class="pt">Taxa de prenhez geral (830/1.244)</div></div>
-      <div class="kpi gold reveal"><div class="num" data-target="1244">0</div><div class="lab">Animals diagnosed</div><div class="pt">Animais diagnosticados</div></div>
-      <div class="kpi white reveal"><div class="num" data-target="45.4" data-dec="1" data-suffix="%">0</div><div class="lab">AI conception (IATF)</div><div class="pt">Concepção por IA — 433/954</div></div>
-      <div class="kpi reveal"><div class="num" data-target="63.2" data-dec="1" data-suffix="%">0</div><div class="lab">IATF pregnancy rate</div><div class="pt">Prenhez na IATF — 603/954</div></div>
+      <div class="kpi reveal"><div class="num" data-target="45.4" data-dec="1" data-suffix="%">0</div><div class="lab">IATF conception rate</div><div class="pt">Concepção à IA — 433/954</div></div>
+      <div class="kpi white reveal"><div class="num" data-target="63.2" data-dec="1" data-suffix="%">0</div><div class="lab">Total pregnancy rate</div><div class="pt">Prenhez total (IA + touro) — 603/954</div></div>
+      <div class="kpi gold reveal"><div class="num" data-target="954">0</div><div class="lab">Inseminated animals</div><div class="pt">Universo inseminado (DG)</div></div>
+      <div class="kpi reveal"><div class="num" data-target="71.8" data-dec="1" data-suffix="%">0</div><div class="lab">AI share of pregnancies</div><div class="pt">das prenhezes via IA — 433/603</div></div>
     </div>
   </section>
 
@@ -173,43 +173,43 @@
     <div class="grid">
 
       <div class="panel reveal">
-        <h3>Diagnosis pipeline (IATF)</h3>
-        <div class="pt">Funil do diagnóstico — coorte inseminada</div>
+        <h3>Diagnosis pipeline</h3>
+        <div class="pt">Funil do diagnóstico — universo inseminado</div>
         <div class="canvas-box"><canvas id="cPipe"></canvas></div>
       </div>
 
       <div class="panel reveal">
-        <h3>Result breakdown (IATF)</h3>
-        <div class="pt">Composição do resultado: IA vs Touro vs Vazia</div>
+        <h3>Result breakdown</h3>
+        <div class="pt">Composição: IA vs Touro de repasse vs Vazia</div>
         <div class="canvas-box"><canvas id="cDonut"></canvas></div>
       </div>
 
-      <div class="panel reveal">
-        <h3>IATF vs natural service</h3>
-        <div class="pt">IATF (954) vs monta natural (290) — resultado do diagnóstico</div>
-        <div class="canvas-box"><canvas id="cCohort"></canvas></div>
-        <div class="note">A monta natural teve prenhez maior (78.3% vs 63.2%), mas quase toda por touro (199 de 227). A IATF entrega genética de IA: 433 prenhes via IA.</div>
-      </div>
-
-      <div class="panel reveal">
-        <h3>Pregnancy rate by inseminator</h3>
-        <div class="pt">Taxa de prenhez por inseminador (IATF)</div>
-        <div class="canvas-box"><canvas id="cIns"></canvas></div>
-        <div class="note">Desempenho equilibrado: Fredrick 69.3% e Carlos 68.6% de prenhez; concepção por IA de 51.7% e 48.9%.</div>
-      </div>
-
       <div class="panel span2 reveal">
-        <h3>Pregnancy rate by herd</h3>
-        <div class="pt">Taxa de prenhez por lote — ordenado da maior para a menor</div>
-        <div class="canvas-box tall"><canvas id="cHerd"></canvas></div>
-        <div class="note">Barra = % prenhe · n = animais diagnosticados no lote. Elea (85.8%) e Kamungue (85.2%) lideram; Mburu/Leiyangiri (30.4%) e Kaberia (36.7%) ficam bem abaixo — candidatos a revisão de manejo nutricional/sanitário.</div>
+        <h3>Result by inseminated herd</h3>
+        <div class="pt">Resultado por lote inseminado — IATF (IA), total prenhe e taxa de prenhez · ordenado pela prenhez</div>
+        <div class="canvas-box tall"><canvas id="cLote"></canvas></div>
+        <div class="note">Barras = animais (IA + touro = prenhes; vermelho = vazias). Linha branca = taxa de prenhez total; linha tracejada = taxa de IATF (só IA). Elea (85.8% / IATF 65.1%) e Kamungue (85.2% / 70.5%) lideram; Mburu/Leiyangiri (30.4% / 16.1%) e Kaberia (36.7% / 21.1%) ficam muito abaixo.</div>
+      </div>
+
+      <div class="panel reveal">
+        <h3>Result by inseminator</h3>
+        <div class="pt">Resultado por inseminador (universo inseminado)</div>
+        <div class="canvas-box"><canvas id="cIns"></canvas></div>
+        <div class="note">Carlos: 68.6% prenhez e 48.9% de concepção à IA (n=474). Fredrick: 58.4% e 42.5% (n=466).</div>
+      </div>
+
+      <div class="panel reveal">
+        <h3>Cyclicity experiment — Kindelál</h3>
+        <div class="pt">Experimento: avaliação de ciclicidade ovariana (40 vacas)</div>
+        <div class="canvas-box"><canvas id="cCyc"></canvas></div>
+        <div class="note">Das 38 vacas abertas, 23 (60.5%) estavam em anestro (não ciclando) e 15 ciclando; só 2 estavam prenhes (touro). O alto anestro explica a prenhez de ~5% e indica necessidade de protocolo de indução de ciclicidade / revisão nutricional antes da IATF.</div>
       </div>
 
       <div class="panel span2 reveal">
         <h3>Conception rate by bull (semen)</h3>
-        <div class="pt">Taxa de concepção por touro (sêmen) — IA ÷ inseminadas, ordenado pela taxa</div>
+        <div class="pt">Taxa de concepção à IA por touro (sêmen) = prenhes IA ÷ inseminadas · ordenado pela taxa</div>
         <div class="canvas-box xtall"><canvas id="cBull"></canvas></div>
-        <div class="note">Apenas touros com n ≥ 20. Barra = taxa de concepção por IA · n = animais inseminados com o sêmen. KPO 1955 (82.6%), KPO 1971 (75.0%), 1156/356 (74.6%) e BO 1182/786 (72.9%) puxam o resultado; 1912 (19.2%) e 322/956 (23.8%) destroem a média e devem sair do programa.</div>
+        <div class="note">Apenas touros com n ≥ 20. Barra = taxa de concepção à IA · n = animais inseminados com o sêmen. KPO 1955 (82.6%), KPO 1971 (75.0%), 1156/356 (74.6%) e BO 1182/786 (72.9%) puxam o resultado; 1912 (19.2%) e 322/956 (23.8%) derrubam a média e devem sair do programa.</div>
       </div>
 
     </div>
@@ -218,14 +218,14 @@
   <section>
     <div class="sec-head reveal">
       <div class="kick">KEY TAKEAWAYS · CONCLUSÕES</div>
-      <h2>66.7% overall pregnancy · 1.244 diagnosed</h2>
-      <div class="pt">Duas coortes: IATF e monta natural</div>
+      <h2>63.2% pregnancy · 45.4% from AI (IATF)</h2>
+      <div class="pt">Universo principal: 954 animais inseminados</div>
     </div>
     <div class="takes">
-      <div class="take reveal"><div class="n">01</div><div class="t">Full coverage</div><div class="d">1.244 animais diagnosticados — 954 via IATF e 290 em monta natural. 830 prenhes no total (66.7%).</div></div>
-      <div class="take reveal"><div class="n">02</div><div class="t">AI-driven (IATF)</div><div class="d">A IATF atingiu 63.2% de prenhez; só a IA entregou 45.4% de concepção — 71.8% das prenhezes da IATF. O touro de repasse somou 17.8%.</div></div>
-      <div class="take reveal"><div class="n">03</div><div class="t">Consistent team</div><div class="d">Inseminadores alinhados: Fredrick 51.7% e Carlos 48.9% de concepção por IA, ~69% de prenhez cada.</div></div>
-      <div class="take reveal"><div class="n">04</div><div class="t">Spread to act on</div><div class="d">Grande amplitude: touros de 82.6% (KPO 1955) a 19.2% (1912) e lotes de 85.8% (Elea) a 30.4% (Mburu) — espaço claro para seleção de sêmen e manejo.</div></div>
+      <div class="take reveal"><div class="n">01</div><div class="t">Inseminated result</div><div class="d">954 inseminadas: 603 prenhes (63.2%) — 433 por IA (IATF 45.4%) e 170 por touro de repasse (17.8%). 351 vazias.</div></div>
+      <div class="take reveal"><div class="n">02</div><div class="t">AI-driven</div><div class="d">71.8% de todas as prenhezes dos lotes inseminados vieram da IA — a genética da IATF domina o resultado.</div></div>
+      <div class="take reveal"><div class="n">03</div><div class="t">Team</div><div class="d">Carlos 48.9% de IATF (68.6% prenhez); Fredrick 42.5% (58.4%). Diferença a investigar (manejo/sêmen/lotes).</div></div>
+      <div class="take reveal"><div class="n">04</div><div class="t">Cyclicity matters</div><div class="d">No lote Kindelál, 60.5% das vacas abertas estavam em anestro — prenhez de só 5%. Ciclicidade é o gargalo a tratar antes da IATF.</div></div>
     </div>
   </section>
 
@@ -233,10 +233,11 @@
 
 <div class="method">
   <div class="box reveal">
-    <b>Metodologia / Methodology.</b> Fonte: planilha <b>Pasta2.xlsx</b> (abas DG, Inseminação, Sem Inseminação).
-    Coorte IATF = 954 animais inseminados e diagnosticados; monta natural = 290 não inseminados.
-    Concepção por IA = «Pregnant AI» ÷ total da categoria. Touro de repasse = «Pregnant Bull».
-    <b>122 animais da IATF (12.8%)</b> não tinham inseminador/touro/lote registrados: entram nos totais, mas ficam fora dos recortes por inseminador, lote e touro. Alguns códigos de touro aparecem grafados de forma inconsistente.
+    <b>Metodologia / Methodology.</b> Fonte: <b>Pasta2.xlsx</b> (abas DG e avaliação).
+    Universo principal = <b>954 animais inseminados</b> (aba DG), composto por prenhes de IA + prenhes de touro de repasse + vazias.
+    <b>Taxa de concepção à IA (IATF) = prenhes por IA ÷ universo inseminado</b> = 433 ÷ 954 = 45.4%. Prenhez total = (IA + touro) ÷ inseminadas = 63.2%.
+    14 animais inseminados sem inseminador registrado (e 108 sem lote) entram nos totais, mas ficam fora desses recortes; alguns códigos de touro estão grafados de forma inconsistente.
+    Experimento de ciclicidade: lote <b>Kindelál</b> (40 vacas), status ovariano (ciclando / não ciclando) avaliado no diagnóstico.
   </div>
 </div>
 
@@ -261,22 +262,28 @@ const $=id=>document.getElementById(id);
 const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 const grid={color:LINE,drawBorder:false}, noGrid={display:false};
 const anim=reduce?false:{duration:900,easing:'easeOutQuart'};
-/* verde (bom) → dourado (médio) → vermelho (ruim) conforme a taxa */
 const rateColor=r=>r>=70?GREEN:r>=55?GOLD:RED;
 
-/* ----- dados reais extraídos de Pasta2.xlsx (coorte IATF / aba DG) ----- */
-const HERD=[
- {k:'Elea',n:106,preg:85.8},{k:'Kamungue',n:122,preg:85.2},{k:'Mohamed',n:46,preg:84.8},
- {k:'Ajihaf',n:117,preg:81.2},{k:'Barusei/Ngiricho',n:136,preg:73.5},{k:'Kibet/Naupe',n:70,preg:65.7},
- {k:'Nakoslonyui',n:66,preg:56.1},{k:'Mohammed/Osman',n:37,preg:45.9},{k:'Kaberia',n:90,preg:36.7},
- {k:'Mburu/Leiyangiri',n:56,preg:30.4}];
+/* ----- dados reais — Pasta2.xlsx (coorte inseminada / aba DG) ----- */
+const LOTE=[
+ {k:'Elea',n:106,ai:69,bull:22,empty:15,preg:85.8,iatf:65.1},
+ {k:'Kamungue',n:122,ai:86,bull:18,empty:18,preg:85.2,iatf:70.5},
+ {k:'Mohamed',n:46,ai:35,bull:4,empty:7,preg:84.8,iatf:76.1},
+ {k:'Ajihaf',n:117,ai:84,bull:11,empty:22,preg:81.2,iatf:71.8},
+ {k:'Barusei/Ngiricho',n:136,ai:57,bull:43,empty:36,preg:73.5,iatf:41.9},
+ {k:'Kibet/Naupe',n:70,ai:19,bull:27,empty:24,preg:65.7,iatf:27.1},
+ {k:'Nakoslonyui',n:66,ai:30,bull:7,empty:29,preg:56.1,iatf:45.5},
+ {k:'Mohammed/Osman',n:37,ai:12,bull:5,empty:20,preg:45.9,iatf:32.4},
+ {k:'Kaberia',n:90,ai:19,bull:14,empty:57,preg:36.7,iatf:21.1},
+ {k:'Mburu/Leiyangiri',n:56,ai:9,bull:8,empty:39,preg:30.4,iatf:16.1}];
 const BULL=[
  {k:'KPO 1955',n:23,r:82.6},{k:'KPO 1971',n:32,r:75.0},{k:'1156/356',n:59,r:74.6},
  {k:'BO 1182/786',n:59,r:72.9},{k:'KPO 1936',n:44,r:68.2},{k:'652',n:50,r:68.0},
  {k:'0037',n:106,r:65.1},{k:"KPO 1673'22",n:45,r:42.2},{k:'1673',n:155,r:39.4},
  {k:'1485/1057',n:36,r:33.3},{k:'322/956',n:101,r:23.8},{k:'1912',n:73,r:19.2}];
+const CYC={cycling:15,notcyc:23,preg:2};
 
-/* plugin: rótulo da taxa no fim da barra + volume (n) na base (barras horizontais) */
+/* plugin: % no fim da barra + volume (n) na base (barras horizontais) */
 const hLabels=(vals,counts)=>({id:'hLabels',afterDatasetsDraw(c){
   const ctx=c.ctx, meta=c.getDatasetMeta(0); ctx.save(); ctx.textBaseline='middle';
   meta.data.forEach((bar,i)=>{
@@ -289,7 +296,7 @@ const hLabels=(vals,counts)=>({id:'hLabels',afterDatasetsDraw(c){
 
 const charts={
   cPipe:()=>new Chart($('cPipe'),{type:'bar',data:{
-    labels:[['Inseminated','Inseminadas'],['Pregnant','Prenhe'],['AI preg.','Prenhe IA'],['Bull preg.','Prenhe touro'],['Empty','Vazia']],
+    labels:[['Inseminated','Inseminadas'],['Pregnant','Prenhe'],['AI / IATF','Prenhe IA'],['Bull','Prenhe touro'],['Empty','Vazia']],
     datasets:[{data:[954,603,433,170,351],backgroundColor:[GREY,GREEN,GREEN,GOLD,RED],borderRadius:6,maxBarThickness:78}]},
     options:{animation:anim,plugins:{legend:{display:false}},scales:{y:{grid,ticks:{precision:0}},x:{grid:noGrid}}}}),
 
@@ -299,42 +306,50 @@ const charts={
     options:{animation:reduce?false:{animateRotate:true,duration:1100},cutout:'62%',
       plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}}}}}),
 
-  cCohort:()=>new Chart($('cCohort'),{type:'bar',data:{
-    labels:[['IATF','(inseminadas · 954)'],['Monta natural','(sem IA · 290)']],
+  cLote:()=>new Chart($('cLote'),{data:{
+    labels:LOTE.map(l=>l.k),
     datasets:[
-     {label:'Prenhe IA / AI',data:[433,28],backgroundColor:GREEN,stack:'s'},
-     {label:'Prenhe touro / Bull',data:[170,199],backgroundColor:GOLD,stack:'s'},
-     {label:'Vazia / Empty',data:[351,63],backgroundColor:RED,stack:'s'}]},
-    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}},
-      tooltip:{callbacks:{footer:items=>{const t=items.reduce((s,i)=>s+i.parsed.y,0);return 'Total: '+t;}}}},
-     scales:{x:{stacked:true,grid:noGrid},y:{stacked:true,grid,ticks:{precision:0}}}}}),
+     {type:'bar',label:'Prenhe IA / AI',data:LOTE.map(l=>l.ai),backgroundColor:GREEN,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Prenhe touro / Bull',data:LOTE.map(l=>l.bull),backgroundColor:GOLD,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Vazia / Empty',data:LOTE.map(l=>l.empty),backgroundColor:RED,stack:'s',yAxisID:'y'},
+     {type:'line',label:'Prenhez total / total rate',data:LOTE.map(l=>l.preg),borderColor:WHITE,backgroundColor:WHITE,
+       yAxisID:'y1',tension:.3,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:WHITE},
+     {type:'line',label:'IATF (só IA) / AI rate',data:LOTE.map(l=>l.iatf),borderColor:GREEN,backgroundColor:GREEN,
+       borderDash:[5,4],yAxisID:'y1',tension:.3,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:GREEN}]},
+    options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}},
+      tooltip:{callbacks:{afterBody:items=>{const l=LOTE[items[0].dataIndex];return `n=${l.n} · prenhez ${l.preg}% · IATF ${l.iatf}%`;}}}},
+     scales:{x:{stacked:true,grid:noGrid,ticks:{maxRotation:40,minRotation:0}},
+       y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animais'}},
+       y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa'}}}}}),
 
   cIns:()=>new Chart($('cIns'),{data:{
     labels:[['Carlos V.','Nascimento'],['Fredrick O.','Obondo']],
     datasets:[
-     {type:'bar',label:'Prenhe IA / AI',data:[232,185],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
-     {type:'bar',label:'Prenhe touro / Bull',data:[93,63],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
-     {type:'bar',label:'Vazia / Empty',data:[149,110],backgroundColor:RED,stack:'s',yAxisID:'y'},
-     {type:'line',label:'Taxa de prenhez / rate',data:[68.6,69.3],borderColor:WHITE,backgroundColor:WHITE,
-       yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE}]},
+     {type:'bar',label:'Prenhe IA / AI',data:[232,198],backgroundColor:GREEN,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Prenhe touro / Bull',data:[93,74],backgroundColor:GOLD,stack:'s',yAxisID:'y'},
+     {type:'bar',label:'Vazia / Empty',data:[149,194],backgroundColor:RED,stack:'s',yAxisID:'y'},
+     {type:'line',label:'Prenhez total / rate',data:[68.6,58.4],borderColor:WHITE,backgroundColor:WHITE,
+       yAxisID:'y1',tension:.3,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:WHITE},
+     {type:'line',label:'IATF / AI rate',data:[48.9,42.5],borderColor:GREEN,backgroundColor:GREEN,borderDash:[5,4],
+       yAxisID:'y1',tension:.3,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:GREEN}]},
     options:{animation:anim,plugins:{legend:{position:'bottom',labels:{padding:10,boxWidth:14}}},
      scales:{x:{stacked:true,grid:noGrid},
        y:{stacked:true,grid,position:'left',ticks:{precision:0},title:{display:true,text:'animais'}},
        y1:{position:'right',min:0,max:100,grid:noGrid,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa'}}}}}),
 
-  cHerd:()=>new Chart($('cHerd'),{type:'bar',plugins:[hLabels(HERD.map(h=>h.preg),HERD.map(h=>h.n))],data:{
-    labels:HERD.map(h=>h.k),
-    datasets:[{data:HERD.map(h=>h.preg),backgroundColor:HERD.map(h=>rateColor(h.preg)),borderRadius:5,maxBarThickness:30,hoverBackgroundColor:GREEN}]},
-    options:{animation:anim,indexAxis:'y',layout:{padding:{right:48}},
-     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`Prenhez: ${HERD[c.dataIndex].preg}%  ·  n=${HERD[c.dataIndex].n}`}}},
-     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'% prenhe / pregnancy rate'}},y:{grid:noGrid}}}}),
+  cCyc:()=>new Chart($('cCyc'),{type:'doughnut',data:{
+    labels:['Ciclando / Cycling (15 · 37.5%)','Não ciclando / Anestro (23 · 57.5%)','Prenhe touro / Pregnant (2 · 5%)'],
+    datasets:[{data:[CYC.cycling,CYC.notcyc,CYC.preg],backgroundColor:[GREEN,RED,GOLD],borderColor:'#0e1b14',borderWidth:3,hoverOffset:10}]},
+    options:{animation:reduce?false:{animateRotate:true,duration:1100},cutout:'58%',
+      plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:14}},
+        tooltip:{callbacks:{label:c=>`${c.label.split(' (')[0]}: ${c.parsed} de 40`}}}}}),
 
   cBull:()=>new Chart($('cBull'),{type:'bar',plugins:[hLabels(BULL.map(b=>b.r),BULL.map(b=>b.n))],data:{
     labels:BULL.map(b=>b.k),
     datasets:[{data:BULL.map(b=>b.r),backgroundColor:BULL.map(b=>rateColor(b.r)),borderRadius:5,maxBarThickness:28,hoverBackgroundColor:GOLD}]},
     options:{animation:anim,indexAxis:'y',layout:{padding:{right:52}},
      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`Concepção IA: ${BULL[c.dataIndex].r}%  ·  ${BULL[c.dataIndex].n} inseminadas`}}},
-     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa de concepção / conception rate'}},y:{grid:noGrid}}}})
+     scales:{x:{grid,min:0,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'taxa de concepção à IA / AI conception rate'}},y:{grid:noGrid}}}})
 };
 
 /* lazy-init: cada gráfico só é criado/animado ao entrar na tela */

@@ -1,3 +1,8 @@
 # Dados internos / internal data — fora do deploy público
-Pasta2.xlsx
+*.xlsx
 *.pptx
+*.csv
+Nova pasta*/
+_pptx_media/
+_extracted_*
+.claude/
